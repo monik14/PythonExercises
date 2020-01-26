@@ -1,0 +1,16 @@
+# Get all the orderStatus from a file at a location and print it in a set
+
+def readData(orderPath):
+  orderObj = open(orderPath)
+  orderData = orderObj.read()
+  orderDetails = orderData.splitlines()
+  return orderDetails
+
+ordersInfo = readData('/data/retail_db/orders/part-00000')
+
+s= set([])
+for i in ordersInfo:
+  s.add(i.split(',')[3])
+
+for i in s:
+  print(i)
