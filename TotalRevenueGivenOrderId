@@ -1,0 +1,19 @@
+# Create a Function to get revenue for a given order_id (from order_items)
+
+def readDataOrder(orderItemsPath):
+    orderObj1 = open(orderItemsPath)
+    orderData = orderObj1.read()
+    orderInfo = orderData.splitlines()
+    return orderInfo
+
+orderItemsPath = '/data/retail_db/order_items/part-00000'
+orderItemsData = readData(orderItemsPath)
+
+def getOrderRevenue(orderItemsData, orderId):
+    orderRevenue = 0.0
+    for orderItem in orderItemsData:
+        if(int(orderItem.split(',')[1]) == orderId):
+            orderRevenue += float(orderItem.split(',')[4])
+    return orderRevenue
+
+getOrderRevenue(orderItemsData, 2)
