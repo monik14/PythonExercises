@@ -1,0 +1,24 @@
+# Create a function to get all the order ids and it's corresponding order revenues
+
+def readData(orderItemsPath):
+    orderObj2 = open(orderItemsPath)
+    orderFile = orderObj2.read()
+    orderData = orderFile.splitlines()
+    return orderData
+
+orderItemsPath = '/data/retail_db/order_items/part-00000'
+orderItemsData = readData(orderItemsPath)
+
+def getAllOrderRevenue(orderItemsData):
+    revenuePerOrder = {}
+    for orderItem in orderItemsData:
+        orderTuple = (int(orderItem.split(',')[1]), float(orderItem.split(',')[4]))
+        if(revenuePerOrder.get(orderTuple[0])):
+            revenuePerOrder[orderTuple[0]] += orderTuple[1]
+        else:
+            revenuePerOrder[orderTuple[0]] = orderTuple[1]
+    return revenuePerOrder
+        
+revenuePerOrder = getAllOrderRevenue(orderItemsData)
+
+revenuePerOrder
